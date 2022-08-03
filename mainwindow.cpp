@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent), inputSocket{new QUdpSocket{}}, sendingSocket{new QUdpSocket{}}
+    : QMainWindow(parent), inputSocket{new QUdpSocket{this}}, sendingSocket{new QUdpSocket{this}}
 {
     setupUi(this);
     connect(inputSocket, &QUdpSocket::readyRead, this, &MainWindow::onInputSignal);
@@ -20,7 +20,8 @@ void MainWindow::onInputSignal()
 {
     if (inputSocket->hasPendingDatagrams())
     {
-        QByteArray datagramm{inputSocket->pendingDatagramSize(), ' '};
+        QByteArray datagramm{};
+        datagramm.resize(inputSocket->pendingDatagramSize());
         inputSocket->readDatagram(datagramm.data(), datagramm.size());
         chatTextField->append(datagramm.data());
     }
@@ -37,7 +38,10 @@ void MainWindow::onSendBtnClicked()
 void MainWindow::onInputPortChanged()
 {
     inputPort = inputPortLineEdit->text().toInt();
-    inputSocket->bind(inputPort);
+    //inputSocket->abort();
+    inputSocket->bind(remoteAddress, inputPort, QUdpSocket::ShareAddress);
+    inputSocket->waitForConnected(30000);
+    chatTextField->append(QString{"Listening on port: "} + QString::number(inputSocket->localPort()) + "\n");
 
 }
 
