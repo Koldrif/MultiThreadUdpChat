@@ -28,8 +28,8 @@ private:
 private slots:
     void onInputSignal();
     void onSendBtnClicked();
-    void onInputPortChanged(const QString& port);
-    void onRemotePortChanged(const QString& port);
+    void onInputPortChanged();
+    void onRemotePortChanged();
 
 };
 #endif // MAINWINDOW_H

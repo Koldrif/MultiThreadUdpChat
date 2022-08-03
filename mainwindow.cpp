@@ -1,13 +1,15 @@
 #include "mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent), inputSocket{}, sendingSocket{}
+    : QMainWindow(parent), inputSocket{new QUdpSocket{}}, sendingSocket{new QUdpSocket{}}
 {
     setupUi(this);
     connect(inputSocket, &QUdpSocket::readyRead, this, &MainWindow::onInputSignal);
     connect(sendMessageBtn, &QPushButton::clicked, this, &MainWindow::onSendBtnClicked);
-    connect(inputPortLineEdit, &QLineEdit::textChanged, this, &MainWindow::onInputPortChanged);
-    connect(remotePortLineEdit, &QLineEdit::textChanged, this, &MainWindow::onRemotePortChanged);
+    //connect(inputPortLineEdit, &QLineEdit::textChanged, this, &MainWindow::onInputPortChanged);
+    //connect(remotePortLineEdit, &QLineEdit::textChanged, this, &MainWindow::onRemotePortChanged);
+    connect(ConnectBtn, &QPushButton::clicked, this, &MainWindow::onInputPortChanged);
+    connect(ConnectBtn, &QPushButton::clicked, this, &MainWindow::onRemotePortChanged);
 }
 
 MainWindow::~MainWindow()
@@ -32,14 +34,16 @@ void MainWindow::onSendBtnClicked()
     sendingSocket->writeDatagram(dataToSend, remoteAddress, remotePort);
 }
 
-void MainWindow::onInputPortChanged(const QString &port)
+void MainWindow::onInputPortChanged()
 {
-    inputPort = port.toInt();
+    inputPort = inputPortLineEdit->text().toInt();
+    inputSocket->bind(inputPort);
+
 }
 
-void MainWindow::onRemotePortChanged(const QString &port)
+void MainWindow::onRemotePortChanged()
 {
-    remotePort = port.toInt();
+    remotePort = remotePortLineEdit->text().toInt();
 }
 
 
