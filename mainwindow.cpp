@@ -38,11 +38,10 @@ void MainWindow::onSendBtnClicked()
 void MainWindow::onInputPortChanged()
 {
     inputPort = inputPortLineEdit->text().toInt();
-    //inputSocket->abort();
-    inputSocket->bind(remoteAddress, inputPort, QUdpSocket::ShareAddress);
-    inputSocket->waitForConnected(30000);
+    // inputSocket->abort();
+    inputSocket->bind(inputPort);
+    //inputSocket->waitForConnected(30000);
     chatTextField->append(QString{"Listening on port: "} + QString::number(inputSocket->localPort()) + "\n");
-
 }
 
 void MainWindow::onRemotePortChanged()
