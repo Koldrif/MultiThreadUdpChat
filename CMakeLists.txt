@@ -15,7 +15,7 @@ find_package(Qt6 COMPONENTS
         Network
         REQUIRED)
 
-add_executable(CppProjects main.cpp mainwindow.cpp mainwindow.h mainwindow.ui)
+add_executable(CppProjects main.cpp mainwindow.cpp mainwindow.h mainwindow.ui MessageGetter.cpp MessageGetter.h TextWriter.cpp TextWriter.h MultiThreadUdpChat-Build/MessageSender.cpp MultiThreadUdpChat-Build/MessageSender.h)
 target_link_libraries(CppProjects
         Qt::Core
         Qt::Gui
