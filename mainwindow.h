@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include <QThread>
 #include <QtNetwork/QUdpSocket>
-#include "./ui_mainwindow.h"
+#include "ui_mainwindow.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
