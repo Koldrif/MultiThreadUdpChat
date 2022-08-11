@@ -1,21 +1,21 @@
 cmake_minimum_required(VERSION 3.22)
 project(CppProjects)
 
-set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
 set(CMAKE_PREFIX_PATH "C:\\Qt_6.3\\6.3.1\\mingw_64")
 
-find_package(Qt6 COMPONENTS
+find_package(Qt5 COMPONENTS
         Core
         Gui
         Widgets
         Network
         REQUIRED)
 
-add_executable(CppProjects main.cpp mainwindow.cpp mainwindow.h mainwindow.ui MessageGetter.cpp MessageGetter.h TextWriter.cpp TextWriter.h MultiThreadUdpChat-Build/MessageSender.cpp MultiThreadUdpChat-Build/MessageSender.h)
+add_executable(CppProjects main.cpp mainwindow.cpp mainwindow.h mainwindow.ui MessageGetter.cpp MessageGetter.h TextWriter.cpp TextWriter.h)
 target_link_libraries(CppProjects
         Qt::Core
         Qt::Gui
