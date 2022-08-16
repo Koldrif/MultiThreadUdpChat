@@ -15,7 +15,7 @@ find_package(Qt5 COMPONENTS
         Network
         REQUIRED)
 
-add_executable(CppProjects main.cpp mainwindow.cpp mainwindow.h mainwindow.ui MessageGetter.cpp MessageGetter.h TextWriter.cpp TextWriter.h)
+add_executable(CppProjects main.cpp mainwindow.cpp mainwindow.h mainwindow.ui networkinteractor.cpp networkinteractor.h)
 target_link_libraries(CppProjects
         Qt::Core
         Qt::Gui

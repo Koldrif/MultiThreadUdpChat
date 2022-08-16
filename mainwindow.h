@@ -18,12 +18,13 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     QHostAddress remoteAddress = QHostAddress::LocalHost;
+    qint32 remotePort;
+    qint32 inputPort;
 
 private:
     QUdpSocket* inputSocket;
     QUdpSocket* sendingSocket;
-    qint32 remotePort;
-    qint32 inputPort;
+
 
 private slots:
     void onInputSignal();
